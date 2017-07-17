@@ -1,9 +1,3 @@
-/***************************************************************************
- *
- * Sequential version of Quick sort
- *
- ***************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -22,7 +16,8 @@ struct qsort_data
 	int high;
 };
 
-pthread_t threads[1];
+// Note that the size is hardcoded
+pthread_t threads[1]; 
 struct qsort_data t_qsort_data[1];
 
 static int *v;
