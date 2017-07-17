@@ -1,9 +1,3 @@
-/***************************************************************************
- *
- * Sequential version of Matrix-Matrix multiplication
- *
- ***************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -63,7 +57,7 @@ static void init_threads_matmul_blocked()
 {
 	int i;
 
-	// Blocked
+	// Block wise 
 	for(i = 0; i < NR_OF_THREADS*0.5; i++) {
 		int k = i*2;
 		t_data[k].start_i = 0;
