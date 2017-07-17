@@ -1,9 +1,3 @@
-/***************************************************************************
- *
- * Sequential version of Matrix-Matrix multiplication
- *
- ***************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -31,10 +25,6 @@ static void init_matrix(void)
 
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < SIZE; j++) {
-			/* Simple initialization, which enables us to easy check
-			 * the correct answer. Each element in c will have the same 
-			 * value as SIZE after the matmul operation.
-			 */
 			a[i][j] = 1.0;
 			b[i][j] = 1.0;
 		}
@@ -60,6 +50,7 @@ static void init_threads_matmul()
 {
 	int i;
 
+	// Row wise
 	for(i = 0; i < NR_OF_THREADS; i++) {
 		t_data[i].start_i = ROWS_PER_THREAD * i ;
 		t_data[i].end_i = ROWS_PER_THREAD * (i+1);
