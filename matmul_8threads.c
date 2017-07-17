@@ -32,7 +32,7 @@ static void init_matrix()
 	}
 }
 
-static void *row_calculation_blocked(void *args)
+static void *row_calculation_blockwise(void *args)
 {
 	struct thread_data *data = (struct thread_data *)args;
 	int i, j, k;
@@ -49,7 +49,7 @@ static void *row_calculation_blocked(void *args)
 	return 0;
 }
 
-static void init_threads_matmul_blocked()
+static void init_threads_matmul_blockwise()
 {
 	int i;
 
@@ -60,13 +60,13 @@ static void init_threads_matmul_blocked()
 		t_data[k].end_i = SIZE*0.5;
 		t_data[k].start_j = SIZE/(NR_OF_THREADS*0.5) * i;
 		t_data[k].end_j = SIZE/(NR_OF_THREADS*0.5) * (i+1);
-		int t0 = pthread_create(&threads[k], NULL, row_calculation_blocked, &t_data[k]);
+		int t0 = pthread_create(&threads[k], NULL, row_calculation_blockwise, &t_data[k]);
 
 		t_data[k+1].start_i = SIZE*0.5;
 		t_data[k+1].end_i = SIZE;
 		t_data[k+1].start_j = t_data[k].start_j;
 		t_data[k+1].end_j = t_data[k].end_j;
-		int t1 = pthread_create(&threads[k+1], NULL, row_calculation_blocked, &t_data[k+1]);
+		int t1 = pthread_create(&threads[k+1], NULL, row_calculation_blockwise, &t_data[k+1]);
 	}
 }
 
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 {
 	init_matrix();
 
-	init_threads_matmul_blocked();
+	init_threads_matmul_blockwise();
 	join_threads();
 
 	//print_matrix();
