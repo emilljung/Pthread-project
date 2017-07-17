@@ -31,7 +31,7 @@ static void init_matrix(void)
 	}
 }
 
-static void *thread_matmul_seq(void *args)
+static void *thread_matmul_rowwise(void *args)
 {
 	struct thread_data *data = (struct thread_data *)args;
 	int i, j, k;
@@ -46,7 +46,7 @@ static void *thread_matmul_seq(void *args)
 	}
 }
 
-static void init_threads_matmul()
+static void init_threads_matmul_rowwise()
 {
 	int i;
 
@@ -54,7 +54,7 @@ static void init_threads_matmul()
 	for(i = 0; i < NR_OF_THREADS; i++) {
 		t_data[i].start_i = ROWS_PER_THREAD * i ;
 		t_data[i].end_i = ROWS_PER_THREAD * (i+1);
-		int t0 = pthread_create(&threads[i], NULL, thread_matmul_seq, &t_data[i]);
+		int t0 = pthread_create(&threads[i], NULL, thread_matmul_rowwise, &t_data[i]);
 	}
 }
 
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
 {
 	init_matrix();
 
-	init_threads_matmul();
+	init_threads_matmul_rowwise();
 	join_threads();
 
 	//print_matrix();
