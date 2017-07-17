@@ -26,10 +26,6 @@ static void init_matrix()
 
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < SIZE; j++) {
-			/* Simple initialization, which enables us to easy check
-			 * the correct answer. Each element in c will have the same 
-			 * value as SIZE after the matmul operation.
-			 */
 			a[i][j] = 1.0;
 			b[i][j] = 1.0;
         	}
