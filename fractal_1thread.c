@@ -8,9 +8,6 @@
 #define height 1024
 #define NR_OF_THREADS 1
 
-// draws a mandelbrot fractal
-// compile with gcc fractal.c −lm −std=c99 −o fractal
-
 struct thread_data
 {
 	int start_j;
@@ -86,6 +83,7 @@ static void init_threads_mandelbrot(unsigned int *pixmap)
 {
 	int i;
 
+	// Row wise
 	for(i = 0; i < NR_OF_THREADS; i++) {
 		t_data[i].start_j = (height/NR_OF_THREADS) * i ;
 		t_data[i].end_j = (height/NR_OF_THREADS) * (i+1);
