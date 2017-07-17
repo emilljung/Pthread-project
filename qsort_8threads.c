@@ -1,9 +1,3 @@
-/***************************************************************************
- *
- * Sequential version of Quick sort
- *
- ***************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -11,7 +5,7 @@
 #define KILO (1024)
 #define MEGA (KILO*KILO)
 #define MAX_ITEMS (64*MEGA)
-#define NR_OF_THREADS 15 // To make 8 active threads
+#define NR_OF_THREADS 15 // To make 8 active threads. Check the report for more details
 
 #define swap(v, a, b) {unsigned tmp; tmp=v[a]; v[a]=v[b]; v[b]=tmp;}
 
